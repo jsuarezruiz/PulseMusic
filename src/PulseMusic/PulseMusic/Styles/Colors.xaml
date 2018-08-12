@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PulseMusic.Styles.Colors">
+    
+    <!-- Colors -->
+    <Color x:Key="WhiteColor">#FFFFFF</Color>
+    <Color x:Key="BlackColor">#000000</Color>
+    <Color x:Key="LightBackgroundColor">#4D3130</Color>
+    <Color x:Key="BackgroundColor">#33282E</Color>
+    <Color x:Key="PlayerRedColor">#DE5154</Color>
+    <Color x:Key="TimeGrayColor">#7B6664</Color>
+    
+</ResourceDictionary>

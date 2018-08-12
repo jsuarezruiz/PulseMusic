@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:PulseMusic.Controls"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:buttonCircle="clr-namespace:ButtonCircle.FormsPlugin.Abstractions;assembly=ButtonCircle.FormsPlugin.Abstractions"
+    x:Class="PulseMusic.Views.PlayerView"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SongTitleStyle" TargetType="Label">
+                <Setter Property="Font" Value="{StaticResource SourceSansRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize20}" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="12, 48, 12, 24" />
+            </Style>
+
+            <Style x:Key="ButtonsPanel" TargetType="Grid">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+            <Style TargetType="controls:TapImage">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="36" />
+                <Setter Property="Margin" Value="24, 0" />
+            </Style>
+
+            <Style TargetType="controls:ToggleButton">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="36" />
+                <Setter Property="Margin" Value="24, 0" />
+            </Style>
+
+            <Style x:Key="TimeTextStyle" TargetType="Label">
+                <Setter Property="Font" Value="{StaticResource SourceSansRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize14}" />
+                <Setter Property="TextColor" Value="{StaticResource TimeGrayColor}" />
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid
+            x:Name="MainPanel"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="200" />
+            </Grid.RowDefinitions>
+            <controls:CircleGradientBackground   
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Radius="1200"
+                StartColor="{StaticResource LightBackgroundColor}"
+                EndColor="{StaticResource BackgroundColor}" />
+            <Label
+                Grid.Row="0"
+                Text="{Binding Title}"
+                Style="{StaticResource SongTitleStyle}"/>
+            <!--
+            <Label 
+                Grid.Row="0"
+                Style="{StaticResource SongTitleStyle}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span 
+                            Text="{Binding Song.Artist}"  />
+                        <Span 
+                            Text=" - " />
+                        <Span 
+                            Text="{Binding Song.Title}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>         
+            -->
+            <Grid
+                Grid.Row="1"
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="48" />
+                </Grid.RowDefinitions>
+                <ffimageloading:CachedImage   
+                    x:Name="CoverImage"
+                    Grid.Row="0"
+                    Aspect="AspectFit"
+                    Source="{Binding Song.Cover}" 
+                    Margin="30">
+                    <ffimageloading:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation />
+                    </ffimageloading:CachedImage.Transformations>
+                </ffimageloading:CachedImage>
+                <controls:CircleProgress 
+                    Grid.Row="0"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    Progress="{Binding Progress}"
+                    LineBackgroundColor ="{StaticResource BlackColor}"
+                    ProgressColor="{StaticResource PlayerRedColor}"
+                    StrokeWidth="12"
+                    Margin="12"/>
+                <buttonCircle:CircleButton
+                    Command="{Binding PlayCommand}"
+                    FontIcon="FontAwesome"
+                    Icon="{Binding Icon}" 
+                    FontSize="{StaticResource FontSize16}"
+                    TextColor="{StaticResource WhiteColor}" 
+                    HeightRequest="60" 
+                    WidthRequest="60" 
+                    BackgroundColor="{StaticResource PlayerRedColor}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+                <Grid
+                    Grid.Row="1"
+                    Margin="70, -24, 70, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Grid.Column="0"
+                        Text="{Binding StartTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                        Style="{StaticResource TimeTextStyle}"/>
+                    <controls:ToggleButton
+                        Grid.Column="1"
+                        Checked="False"
+                        Animate="False"
+                        CheckedImage="playonce_on"
+                        UnCheckedImage="playonce_off"/>
+                    <controls:TapImage
+                        Grid.Column="2"
+                        Source="shuffle"/>
+                    <Label 
+                        Grid.Column="3"             
+                        Text="{Binding RemainTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                        Style="{StaticResource TimeTextStyle}"/>
+                </Grid>
+            </Grid>
+            <Grid
+                Grid.Row="2"
+                Style="{StaticResource ButtonsPanel}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <controls:TapImage
+                    Grid.Column="0"
+                    Source="rewind"
+                    TapCommand="{Binding RewindCommand}"/>
+                <controls:TapImage
+                    Grid.Column="1"
+                    Source="previous"
+                    WidthRequest="24"
+                    TapCommand="{Binding PreviousCommand}"/>
+                <controls:TapImage
+                    Grid.Column="2"
+                    Source="next"
+                    WidthRequest="24"
+                    TapCommand="{Binding NextCommand}"/>
+                <controls:TapImage
+                    Grid.Column="3"
+                    Source="forward"
+                    TapCommand="{Binding ForwardCommand}"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
