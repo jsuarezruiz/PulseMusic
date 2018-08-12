@@ -33,7 +33,7 @@ The Pulse Music app is available for two platforms:
 
 ## Screens
 
-<img src="images/PulseMusic.gif" alt="Home" Width="320" />
+<img src="images/PulseMusic.png" alt="Home" Width="320" /> <img src="images/PulseMusic.gif" alt="Home" Width="320" />
 
 
 ## Requirements
