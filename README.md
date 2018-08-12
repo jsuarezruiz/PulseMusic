@@ -17,7 +17,6 @@ Pulse Music is a Xamarin.Forms sample to show how to create **goodlooking UI** w
 - Converters
 - Custom Controls
 - Data Binding
-- IoC
 - Messaging Center
 - MVVM
 - Plugins for Xamarin
