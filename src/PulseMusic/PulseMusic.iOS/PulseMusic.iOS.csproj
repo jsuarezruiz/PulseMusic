@@ -95,6 +95,8 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <BundleResource Include="Resources\SourceSansPro-Regular.ttf" />
+    <BundleResource Include="Resources\fontawesome.ttf" />
+    <BundleResource Include="Resources\materialicons.ttf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
