@@ -126,9 +126,13 @@
                     BackgroundColor="{StaticResource PlayerRedColor}"
                     HorizontalOptions="Center"
                     VerticalOptions="Center" />
-                <Grid
-                    Grid.Row="1"
-                    Margin="70, -24, 70, 0">
+                <Grid Grid.Row="1">
+                    <Grid.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="50, -24, 50, 0" />
+                            <On Platform="iOS" Value="30, -24, 70, 0" />
+                        </OnPlatform>
+                    </Grid.Margin>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
